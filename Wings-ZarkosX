@@ -1,6 +1,8 @@
 #!/bin/bash
 # Made by Joy+ZarkosX
 
+clear
+
 echo "📦 Installing Pterodactyl wings update v1.11.13 with Docker...
   ______          _            __   __
  |___  /         | |           \ \ / /
