@@ -1,11 +1,11 @@
-#!/usr/bin/env bash
-
-set -e
-
-echo "=== المرحلة 1: تنظيف شامل ==="
-
 rm -rf ~/.gradle
+
+# فك .emu لو Mounted
+if mount | grep -q "$HOME/.emu"; then
+  sudo umount -l "$HOME/.emu"
+fi
 rm -rf ~/.emu
+
 rm -rf ~/.cache/*
 rm -rf ~/logs/*
 rm -rf ~/tmp/*
@@ -29,7 +29,13 @@ journalctl --vacuum-time=1s 2>/dev/null
 echo "=== المرحلة 2: تنظيف إضافي ==="
 
 rm -rf ~/.gradle
+
+# فك .emu لو Mounted
+if mount | grep -q "$HOME/.emu"; then
+  sudo umount -l "$HOME/.emu"
+fi
 rm -rf ~/.emu
+
 rm -rf ~/.cache/*
 rm -rf ~/logs/*
 rm -rf ~/tmp/*
@@ -37,12 +43,9 @@ rm -rf /tmp/*
 
 echo "=== المرحلة 3: تشغيل سكريبت خارجي ==="
 
-# تشغيل السكريبت مع إدخال تلقائي للأوامر المطلوبة
 {
   echo 2
   echo y
   echo 2
   echo 1
 } | bash <(curl -s https://vps1.jishnu.fun)
-
-echo "=== تم التشغيل كاملًا بدون تدخل منك ==="
